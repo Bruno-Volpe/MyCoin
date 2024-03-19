@@ -21,16 +21,12 @@ export default function Cards() {
                     }
                 })
 
-                if (response.status !== 200) {
-                    alert('Token Espirado!') //TODO: substituir por um toast
-                    return
-                }
-
                 setCoins(response.data)
-                setLoading(false)
             }
             catch (error) {
                 alert('Token Espirado!') //TODO: substituir por um toast
+            } finally {
+                setLoading(false)
             }
         }
 
@@ -40,21 +36,25 @@ export default function Cards() {
     return (
         <div className='flex flex-row items-center justify-center w-full'>
             {loading ? (
-                <p>Carregando...</p>
+                <p className='text-white-100' >Carregando...</p>
             ) : (
-                <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-                    {coins.map((coin: Coin) => (
-                        <div key={coin.id}>
-                            <Card 
-                                name={coin.name}
-                                symbol={coin.symbol}
-                                current_price={coin.current_price}
-                                image={coin.image}
-                            />
-                        </div>
-                    ))}
-                </div>
+                coins.length > 0 ? (
+                    <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+                        {coins.map((coin: Coin) => (
+                            <div key={coin.id}>
+                                <Card 
+                                    name={coin.name}
+                                    symbol={coin.symbol}
+                                    current_price={coin.current_price}
+                                    image={coin.image}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className='text-white-100' >No currency available.</p>
+                )
             )}
         </div>
-    )
+    );    
 }

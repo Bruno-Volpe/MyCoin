@@ -2,7 +2,7 @@ import Router from './routes'
 
 function App() {
   return (
-    <div className="z-0 bg-primary w-full min-h-screen">
+    <div>
       <Router />
     </div>
   )
