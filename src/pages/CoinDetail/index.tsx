@@ -50,7 +50,7 @@ export default function CoinDetailComponent() {
                             <img src={coin.image.large} alt={coin.name} className="w-auto h-32" />
                             <h2 className="text-2xl font-bold mt-4">{coin.name}</h2>
                         </div>
-                        <p className="text-center mt-2 w-full md:w-1/2">{coin.description.en}</p>
+                        <p dangerouslySetInnerHTML={{__html: coin.description.en}} className="text-center mt-2 w-full md:w-1/2 overflow-auto max-h-52"></p>
                     </div>
                 ) : (
                     <p className='text-white-100' >No currency available.</p>
