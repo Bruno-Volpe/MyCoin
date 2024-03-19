@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import CoinGekco from '../services/CoinGecko'
 import { Coin } from '../types'
 
+import Card from './Card'
+
 export default function Cards() {
     const [coins, setCoins] = useState<Coin[]>([])
     const [loading, setLoading] = useState(true)
@@ -24,29 +26,23 @@ export default function Cards() {
         getCoins()
     }, [])
 
-    return(
+    return (
         <>
             {loading ? (
                 <p>Carregando...</p>
             ) : (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Preço</th>
-                            <th>Variação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {coins.map(coin => (
-                            <tr key={coin.id}>
-                                <td>{coin.name}</td>
-                                <td>{coin.current_price}</td>
-                                <td>{coin.price_change_percentage_24h}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+                    {coins.map((coin: Coin) => (
+                        <div key={coin.id}>
+                            <Card 
+                                name={coin.name}
+                                symbol={coin.symbol}
+                                current_price={coin.current_price}
+                                image={coin.image}
+                            />
+                        </div>
+                    ))}
+                </div>
             )}
         </>
     )
