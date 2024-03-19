@@ -43,6 +43,7 @@ export default function Cards() {
                         {coins.map((coin: Coin) => (
                             <div key={coin.id}>
                                 <Card 
+                                    id={coin.id}
                                     name={coin.name}
                                     symbol={coin.symbol}
                                     current_price={coin.current_price}
