@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import logo from '../assets/logo.png'
+
 const Navbar = () => {
     const [, setActive] = useState("")
 
@@ -42,7 +44,7 @@ const Navbar = () => {
                 className='flex items-center'
                 onClick={() => setActive("")}
                 >
-                    {/* <img src={logo} alt="logo" className="w-8 h-8 object-contain" /> */}
+                    <img src={logo} alt="logo" className="w-8 h-8 mr-4 object-contain" />
                     <p className="text-tertiary text-[32px] font-bold">My<span className="text-white-100" >Coin</span></p>
                 </Link>
 
