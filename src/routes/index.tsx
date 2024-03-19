@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import DefaultTemplate from '../components/DefaultTemplate';
+
 import Dashboard from '../pages/Dashboard';
 
 const defaultRoutes: {element: JSX.Element, path: string}[] = [
@@ -11,7 +13,7 @@ export default function Router() {
         <BrowserRouter>
         <Routes>
             {defaultRoutes.map((route, index) => (
-                <Route key={index} path={route.path} element={route.element} />
+                <Route key={index} path={route.path} element={<DefaultTemplate>{route.element}</DefaultTemplate>} />
             ))}
         </Routes>
         </BrowserRouter>
