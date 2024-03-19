@@ -48,7 +48,7 @@ const Navbar = () => {
                     <p className="text-tertiary text-[32px] font-bold">My<span className="text-white-100" >Coin</span></p>
                 </Link>
 
-                <ul className='list-none gap-10'>
+                <ul className='list-none gap-1 flex items-center'>
                     {showLinkTree()}
                 </ul>
             </div>
