@@ -19,6 +19,12 @@ export default function Cards() {
                     sparkline: false
                 }
             })
+
+            if (response.status !== 200) {
+                alert('Token Espirado!') //TODO: substituir por um toast
+                return
+            }
+
             setCoins(response.data)
             setLoading(false)
         }
