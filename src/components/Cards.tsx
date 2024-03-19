@@ -10,30 +10,35 @@ export default function Cards() {
 
     useEffect(() => {
         async function getCoins() {
-            const response = await CoinGekco.get('/coins/markets', {
-                params: {
-                    vs_currency: 'brl',
-                    order: 'market_cap_desc',
-                    per_page: 10,
-                    page: 1,
-                    sparkline: false
+            try {
+                const response = await CoinGekco.get('/coins/markets', {
+                    params: {
+                        vs_currency: 'brl',
+                        order: 'market_cap_desc',
+                        per_page: 10,
+                        page: 1,
+                        sparkline: false
+                    }
+                })
+
+                if (response.status !== 200) {
+                    alert('Token Espirado!') //TODO: substituir por um toast
+                    return
                 }
-            })
 
-            if (response.status !== 200) {
-                alert('Token Espirado!') //TODO: substituir por um toast
-                return
+                setCoins(response.data)
+                setLoading(false)
             }
-
-            setCoins(response.data)
-            setLoading(false)
+            catch (error) {
+                alert('Token Espirado!') //TODO: substituir por um toast
+            }
         }
 
         getCoins()
     }, [])
 
     return (
-        <>
+        <div className='flex flex-row items-center justify-center w-full'>
             {loading ? (
                 <p>Carregando...</p>
             ) : (
@@ -50,6 +55,6 @@ export default function Cards() {
                     ))}
                 </div>
             )}
-        </>
+        </div>
     )
 }
