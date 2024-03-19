@@ -15,7 +15,7 @@ const Navbar = () => {
                     className='text-white-100 text-lg hover:text-tertiary'
                     onClick={() => setActive("")}
                     >
-                        Home
+                        Wallet
                     </Link>
                 </li>
             </>
