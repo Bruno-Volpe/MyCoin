@@ -54,5 +54,11 @@ interface CoinDetail {
     market_cap_rank: number;
 }  
 
-export type { Coin, CoinDetail }
+interface CoinDetailHistory {
+    prices: [number, number][];
+    market_caps: [number, number][];
+    total_volumes: [number, number][];
+}
+
+export type { Coin, CoinDetail, CoinDetailHistory }
   
