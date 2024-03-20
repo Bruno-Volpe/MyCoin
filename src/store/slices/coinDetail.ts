@@ -1,26 +1,70 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-interface CounterState {
-    value: number;
+import CoinGecko from '../../services/CoinGecko';
+
+import { CoinDetails } from '../../types';
+
+interface ApiResult {
+    data: CoinDetails;
 }
 
-const initialState: CounterState = {
-    value: 0,
+const initialState: CoinDetails = {
+    id: '',
+    symbol: '',
+    name: '',
+    description: {},
+    image: {
+        thumb: '',
+        small: '',
+        large: '',
+    },
+    market_data: {
+        current_price: {
+            brl: 0,
+        },
+        market_cap: {
+            brl: 0,
+        },
+        total_volume: {
+            brl: 0,
+        },
+        high_24h: {
+            brl: 0,
+        },
+        low_24h: {
+            brl: 0,
+        },
+        price_change_percentage_24h_in_currency: {
+            brl: 0,
+        },
+    },
 };
 
-const counterSlice = createSlice({
-    name: 'counter',
+const coinDetailSlice = createSlice({
+    name: 'coinDetail',
     initialState,
-    reducers: {
-        increment: (state) => {
-            state.value += 1;
-        },
-        decrement: (state) => {
-            state.value -= 1;
-        },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(fetchCoinDetail.fulfilled, (_state, action) => {
+            return _state = action.payload; // Update the state correctly
+        });
     },
 });
 
+export const fetchCoinDetail = createAsyncThunk(
+    'coinDetail/fetchCoinDetail',
+    async (id: string) => {
+        const coinDetail: ApiResult = await CoinGecko.get(`/coins/${id}`, {
+            params: {
+                localization: false,
+                tickers: false,
+                market_data: true,
+                community_data: false,
+                developer_data: false,
+            },
+        });
+        return coinDetail.data;
+    }
+);
 
-export const { increment, decrement } = counterSlice.actions;
-export default counterSlice.reducer;
+export default coinDetailSlice.reducer;
