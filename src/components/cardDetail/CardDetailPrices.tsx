@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { CoinDetailHistory } from '../../types';
+
+import { formatToBRL } from '../../utils/brasilCurrency';
 
 import CoinGecko from '../../services/CoinGecko';
 
@@ -14,6 +16,10 @@ export default function CoinDetailDescription() {
     const { id } = useParams<{ id: string }>();
     const [coin, setCoin] = useState<CoinDetailHistory>()
     const [loading, setLoading] = useState(true)
+
+    const highest = useRef<number>()
+    const lowest = useRef<number>()
+    const variation = useRef<number>()
 
     useEffect(() => {
         async function getCoins() {
@@ -28,7 +34,13 @@ export default function CoinDetailDescription() {
                     }
                 })
 
+
                 setCoin(response.data)
+                if (response.data && response.data.prices.length > 0) {
+                    lowest.current = Math.min(...response.data.prices.map((price: number[]) => price[1]));
+                    highest.current = Math.max(...response.data.prices.map((price: number[]) => price[1]));
+                    variation.current = ((response.data.prices[response.data.prices.length - 1][1] - response.data.prices[0][1]) / response.data.prices[0][1]) * 100
+                }
             }
             catch (error) {
                 alert('Token Espirado!') //TODO: substituir por um toast
@@ -49,17 +61,18 @@ export default function CoinDetailDescription() {
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 items-center justify-center w-full text-white-100 mt-24'>
                         <div className='text-center'>
                             <h2 className='text-2xl font-bold text-tertiary'>24 Hour Variation</h2>
-                            {/* Percentagem do menor timeStemp sendo considerado 100% */}
-                            <p className=''>{(coin.prices[0][1] * 100) / coin.prices[coin.prices.length - 1][1]}</p>
+                            <p className={variation.current && variation.current > 0 ? 'text-green-500' : 'text-red-500'}>
+                                {(variation.current ?? 0).toFixed(2)} %
+                            </p>
                         </div>
 
                         <div className='text-center'>
                             <h2 className='text-2xl font-bold text-tertiary'>Highest and Lowest Value</h2>
                             <p className=''>
-                                Highest: {Math.max(...coin.prices.map(price => price[1]))}
+                                Highest: {formatToBRL(highest.current ?? 0)}
                             </p>
                             <p className=''>
-                                Lowest: {Math.min(...coin.prices.map(price => price[1]))}
+                                Lowest: {formatToBRL(lowest.current ?? 0)}
                             </p>
                         </div>
                     </div>
