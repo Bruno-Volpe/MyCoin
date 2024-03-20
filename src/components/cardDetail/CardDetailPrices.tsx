@@ -3,7 +3,7 @@ import { formatToBRL } from '../../utils/brasilCurrency';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
-// Volume de mercado - market cap 
+// Volume de mercado - market cap - OK 
 // Alta e baixa - maior Valor e menor Valor - OK
 // variação de preço nas últimas 24 horas - Maior menos o menor - OK
 // gráfico de preço (se possível) -> Componente

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { formatToBRL } from "../utils/brasilCurrency";
+
 interface CardProps {
     id: string;
     name: string;
@@ -20,7 +22,7 @@ export default function Card({ id, name, symbol, current_price, image}: CardProp
                         <h2 className="mb-2 text-xl font-medium leading-tight">{name}</h2>
                         <p className="mb-4 text-base">{symbol}</p>
                     </div>
-                    <p className="text-lg mt-4 text-center font-bold">R$ {current_price}</p>
+                    <p className="text-lg mt-4 text-center font-bold">{formatToBRL(current_price)}</p>
                 </div>
             </div>
         </Link>
