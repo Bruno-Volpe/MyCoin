@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import CardDetailDescription from "../../components/cardDetail/CardDetailDescription"
 import CardDetailPrices from "../../components/cardDetail/CardDetailPrices"
+import CardDetailChart from "../../components/cardDetail/CardDetailChart"
 
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
@@ -21,6 +22,7 @@ export default function CardDetail() {
         <>
             <CardDetailDescription />
             <CardDetailPrices />
+            <CardDetailChart />
         </>
     )
 }
