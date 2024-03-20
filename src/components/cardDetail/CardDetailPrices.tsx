@@ -20,6 +20,7 @@ export default function CoinDetailDescription() {
     const highest = useRef<number>()
     const lowest = useRef<number>()
     const variation = useRef<number>()
+    const marketCap = useRef<number>()
 
     useEffect(() => {
         async function getCoins() {
@@ -41,6 +42,9 @@ export default function CoinDetailDescription() {
                     highest.current = Math.max(...response.data.prices.map((price: number[]) => price[1]));
                     variation.current = ((response.data.prices[response.data.prices.length - 1][1] - response.data.prices[0][1]) / response.data.prices[0][1]) * 100
                 }
+                if (response.data && response.data.market_caps.length > 0) {
+                    marketCap.current = response.data.market_caps[response.data.market_caps.length - 1][1]
+                }
             }
             catch (error) {
                 alert('Token Espirado!') //TODO: substituir por um toast
@@ -58,7 +62,7 @@ export default function CoinDetailDescription() {
                 <p className='text-white-100' >Carregando...</p>
             ) : (
                 coin ? (
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 items-center justify-center w-full text-white-100 mt-24'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-center justify-center w-full text-white-100 mt-24'>
                         <div className='text-center'>
                             <h2 className='text-2xl font-bold text-tertiary'>24 Hour Variation</h2>
                             <p className={variation.current && variation.current > 0 ? 'text-green-500' : 'text-red-500'}>
@@ -73,6 +77,14 @@ export default function CoinDetailDescription() {
                             </p>
                             <p className=''>
                                 Lowest: {formatToBRL(lowest.current ?? 0)}
+                            </p>
+                        </div>
+
+
+                        <div className='text-center'>
+                            <h2 className='text-2xl font-bold text-tertiary'>Market Cap</h2>
+                            <p className=''>
+                                {formatToBRL(marketCap.current ?? 0)}
                             </p>
                         </div>
                     </div>
