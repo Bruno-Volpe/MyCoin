@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import MetaMask from './MetaMask'
+
 import logo from '../assets/logo.png'
 
 const Navbar = () => {
@@ -10,13 +12,7 @@ const Navbar = () => {
         return (
             <>
                 <li>
-                    <Link 
-                    to='/'
-                    className='text-white-100 text-lg hover:text-tertiary'
-                    onClick={() => setActive("")}
-                    >
-                        Wallet
-                    </Link>
+                    <MetaMask />
                 </li>
             </>
         )
