@@ -22,7 +22,7 @@ export default function CardDetail() {
         <>
             <CardDetailDescription />
             <CardDetailPrices />
-            <CardDetailChart />
+            <CardDetailChart id={id ?? ''} />
         </>
     )
 }
