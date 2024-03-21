@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import MetaMask from './MetaMask'
 
 import logo from '../assets/logo.png'
+import { routerPaths } from '../constants'
 
 const Navbar = () => {
     const [, setActive] = useState("")
@@ -38,7 +39,7 @@ const Navbar = () => {
         >
             <div className='w-full flex flex-col sm:flex-row justify-between items-center max-w-7x1 mx-auto'>
                 <Link 
-                to='/'
+                to={routerPaths.dashboard}
                 className='flex items-center'
                 onClick={() => setActive("")}
                 >

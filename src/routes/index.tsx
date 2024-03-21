@@ -6,12 +6,14 @@ import Dashboard from '../pages/Dashboard';
 import CoinDetail from '../pages/CoinDetail';
 import NotFound from '../pages/NotFound';
 
+import { routerPaths } from '../constants';
+
 
 // Uses defaultTemplate to wrap the routes
 const defaultRoutes: {element: JSX.Element, path: string}[] = [
-    {element: <Dashboard />, path: '/'},
-    {element: <CoinDetail />, path: '/coin/:id'},
-    {element: <NotFound />, path: '*'}
+    {element: <Dashboard />, path: routerPaths.dashboard},
+    {element: <CoinDetail />, path: routerPaths.coinId},
+    {element: <NotFound />, path: routerPaths.notFound}
 ]
 
 export default function Router() {

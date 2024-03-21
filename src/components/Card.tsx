@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
 
+import { routerPaths } from "../constants";
+
 import { formatToBRL } from "../utils/brasilCurrency";
 
 interface CardProps {
-    id: string;
+    id?: string;
     name: string;
     symbol: string;
     current_price: number;
     image: string;
 }
 
-export default function Card({ id, name, symbol, current_price, image}: CardProps) {
+export default function Card({ name, symbol, current_price, image}: CardProps) {
     return (
-        <Link to={`/coin/${id}`}>
+        <Link to={routerPaths.coinId}>
             <div className="block rounded-lg bg-secondary shadow-secondary-1 m-2 p-6">
                 <div className="flex justify-center">
                     <img className="rounded-t-lg h-36 w-auto" src={image} alt={name} />
