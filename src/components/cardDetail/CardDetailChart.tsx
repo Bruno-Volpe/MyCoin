@@ -56,6 +56,9 @@ export default function CardDetailChart({ id }: {id: string}) {
                     }
                 })
         
+                // Getting x and y values from the response
+                // x = timestamp
+                // y = price
                 if (response.data.prices.length > 0) {
                     response.data.prices = response.data.prices.map((price: [number, number]) => {
                         return {
@@ -66,6 +69,9 @@ export default function CardDetailChart({ id }: {id: string}) {
                     )
                 }
 
+                // Setting the data to the chart
+                // The chart will only show 5 points
+                // The points are the prices from the last 24 hours
                 data.current = {
                     labels: response.data.prices.filter((_: unknown, index: number) => index % 5 === 0).map((value: { x: moment.MomentInput; }) => moment(value.x).format('HH:mm')),
                     datasets: [

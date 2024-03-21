@@ -8,6 +8,8 @@ import logo from '../assets/logo.png'
 const Navbar = () => {
     const [, setActive] = useState("")
 
+
+    //List of links
     const showLinkTree = () => {
         return (
             <>
