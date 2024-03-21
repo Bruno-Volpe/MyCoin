@@ -17,6 +17,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
+import { toast } from "react-toastify";
 
 ChartJS.register(
     CategoryScale,
@@ -79,7 +80,7 @@ export default function CardDetailChart({ id }: {id: string}) {
                 };
             }
             catch (error) {
-                alert('Token Espirado!') //TODO: substituir por um toast
+                toast.warn('Token Espirado!') //TODO: substituir por um toast
             } finally {
                 setLoading(false)
             }

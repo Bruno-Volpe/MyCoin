@@ -1,6 +1,8 @@
 import { useSDK } from "@metamask/sdk-react";
 import { FaEthereum, FaCircle } from "react-icons/fa";
 
+import { toast } from 'react-toastify'
+
 const App = () => {
     const { sdk, connected, balance } = useSDK();
 
@@ -11,7 +13,7 @@ const App = () => {
               msg: 'Connect + Sign message'
             });
           } catch (err) {
-            alert(`failed to connect..`);
+            toast.warn(`failed to connect..`);
           }
     };
 

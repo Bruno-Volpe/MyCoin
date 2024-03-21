@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import CoinGekco from '../services/CoinGecko'
 import { Coin } from '../types'
 
+import { toast } from 'react-toastify'
+
 import Card from './Card'
 
 export default function Cards() {
@@ -24,7 +26,7 @@ export default function Cards() {
                 setCoins(response.data)
             }
             catch (error) {
-                alert('Token Espirado!') //TODO: substituir por um toast
+                toast.warn('Token Espirado!') //TODO: substituir por um toast
             } finally {
                 setLoading(false)
             }

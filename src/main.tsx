@@ -4,6 +4,8 @@ import './css/index.css'
 
 import { MetaMaskProvider } from "@metamask/sdk-react";
 
+import { ToastContainer } from 'react-toastify';
+
 import { Provider } from 'react-redux'
 import { store } from './store'
 
@@ -22,6 +24,18 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     }}
   >
     <Provider store={store}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <App />
     </Provider>
   </MetaMaskProvider>
