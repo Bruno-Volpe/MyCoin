@@ -34,7 +34,7 @@ const Navbar = () => {
             `
         }
         >
-            <div className='w-full flex justify-between itens-center max-w-7x1 mx-auto' >
+            <div className='w-full flex flex-col sm:flex-row justify-between items-center max-w-7x1 mx-auto'>
                 <Link 
                 to='/'
                 className='flex items-center'
@@ -44,7 +44,7 @@ const Navbar = () => {
                     <p className="text-tertiary text-[32px] font-bold">My<span className="text-white-100" >Coin</span></p>
                 </Link>
 
-                <ul className='list-none gap-1 flex items-center'>
+                <ul className='list-none gap-1 flex items-center mt-4 lg:mt-0 md:mt-0'>
                     {showLinkTree()}
                 </ul>
             </div>
