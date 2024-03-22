@@ -12,7 +12,7 @@ import { routerPaths } from '../constants';
 // Uses defaultTemplate to wrap the routes
 const defaultRoutes: {element: JSX.Element, path: string}[] = [
     {element: <Dashboard />, path: routerPaths.dashboard},
-    {element: <CoinDetail />, path: routerPaths.coinId},
+    {element: <CoinDetail />, path: routerPaths.coinId()},
     {element: <NotFound />, path: routerPaths.notFound}
 ]
 

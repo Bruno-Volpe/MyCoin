@@ -1,6 +1,8 @@
 const routerPaths = {
     dashboard: '/',
-    coinId: '/coin/:id',
+    coinId: function(id?: string) {
+        return `/coin/${id || ':id'}`;
+    },
     notFound: '*'
 } 
 
