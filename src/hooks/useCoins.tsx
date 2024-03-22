@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import CoinGekco from '../services/CoinGecko'
+import getCoins from "../services/CoinGecko/getCoins";
 import { Coin } from '../types'
 import { toast } from 'react-toastify'
 
@@ -9,17 +9,9 @@ export default function useCoins() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        async function getCoins() {
+        async function handleCoins() {
             try {
-                const response = await CoinGekco.get('/coins/markets', {
-                    params: {
-                        vs_currency: 'brl',
-                        order: 'market_cap_desc',
-                        per_page: 10,
-                        page: 1,
-                        sparkline: false
-                    }
-                })
+                const response = await getCoins()
 
                 setCoins(response.data)
             }
@@ -30,7 +22,7 @@ export default function useCoins() {
             }
         }
 
-        getCoins()
+        handleCoins()
     }, [])
 
     return { coins, loading }

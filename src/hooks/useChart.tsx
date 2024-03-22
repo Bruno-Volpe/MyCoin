@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 
-import CoinGekco from "../services/CoinGecko";
-
 import { toast } from "react-toastify";
 
 import { CoinDetailHistory } from "../types";
 
 import moment from "moment";
+import getCoinHistory from "../services/CoinGecko/getCoinHistory";
 
 interface ChartData {
     labels: CoinDetailHistory['prices'];
@@ -26,14 +25,9 @@ export default function useChart(id: string) {
     const data = useRef<ChartData>()
 
     useEffect(() => {
-        async function getCoins() {
+        async function handleCoins() {
             try {
-                const response = await CoinGekco.get(`/coins/${id}/market_chart`, {
-                    params: {
-                        vs_currency: 'brl',
-                        days: 1
-                    }
-                })
+                const response = await getCoinHistory(id, 1);
         
                 // Getting x and y values from the response
                 // x = timestamp
@@ -71,7 +65,7 @@ export default function useChart(id: string) {
             }
         }
 
-        getCoins()
+        handleCoins()
     }, [id])
 
     return {
