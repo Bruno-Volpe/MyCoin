@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import getCoins from "../services/CoinGecko/getCoins";
 import { Coin } from '../types'
-import { toast } from 'react-toastify'
+import handleRequest from '../utils/handleRequest';
 
 
 export default function useCoins() {
@@ -10,19 +10,11 @@ export default function useCoins() {
 
     useEffect(() => {
         async function handleCoins() {
-            try {
                 const response = await getCoins()
-
                 setCoins(response.data)
-            }
-            catch (error) {
-                toast.warn('Token Espirado!') //TODO: substituir por um toast
-            } finally {
-                setLoading(false)
-            }
         }
 
-        handleCoins()
+        handleRequest({ callBackFn: handleCoins, setLoading })
     }, [])
 
     return { coins, loading }

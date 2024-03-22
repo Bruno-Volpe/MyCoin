@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 
-import { toast } from "react-toastify";
-
 import { CoinDetailHistory } from "../types";
 
 import moment from "moment";
 import getCoinHistory from "../services/CoinGecko/getCoinHistory";
+
+import handleRequest from "../utils/handleRequest";
 
 interface ChartData {
     labels: CoinDetailHistory['prices'];
@@ -26,7 +26,6 @@ export default function useChart(id: string) {
 
     useEffect(() => {
         async function handleCoins() {
-            try {
                 const response = await getCoinHistory(id, 1);
         
                 // Getting x and y values from the response
@@ -57,15 +56,9 @@ export default function useChart(id: string) {
                         }
                     ]
                 };
-            }
-            catch (error) {
-                toast.warn('Token Espirado!') //TODO: substituir por um toast
-            } finally {
-                setLoading(false)
-            }
         }
 
-        handleCoins()
+        handleRequest({ callBackFn: handleCoins, setLoading })
     }, [id])
 
     return {
